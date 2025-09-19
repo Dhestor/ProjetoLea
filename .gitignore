@@ -1,0 +1,11 @@
+.amazonq
+*env
+*.env
+.env.local
+database
+node_modules/
+.next
+dist/
+@"
+"@ | Out-File -FilePath .gitignore -Encoding utf8
+
