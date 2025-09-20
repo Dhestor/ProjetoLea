@@ -11,12 +11,13 @@ const pool = new Pool({
 
 export async function GET(
   request: Request,
-  { params }: { params: { typeId: string } }
+  context: { params: Promise<{ typeId: string }> }
 ) {
   try {
+    const { typeId } = await context.params;
     const result = await pool.query(
       'SELECT * FROM property_subtypes WHERE property_type_id = $1 ORDER BY name',
-      [params.typeId]
+      [typeId]
     );
     return NextResponse.json(result.rows);
   } catch (error) {
